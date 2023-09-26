@@ -90,7 +90,10 @@ const puppeteerConfig = {
   args: (!options.sandbox ? ['--no-sandbox'] : []).concat([
     '--disable-translate',
     '--disable-extensions',
-    '--disable-sync'
+    '--disable-sync',
+    '--disable-gpu',
+    '--single-process',
+    '--no-zygote'
   ])
 }
 
@@ -143,6 +146,8 @@ async function main () {
   const buildError = await build(inputPath)
 
   if (options.buildOnce) {
+    await puppeteer.close()
+    await puppeteer.quit()
     process.exit(buildError ? 1 : 0)
   } else {
     watch()
