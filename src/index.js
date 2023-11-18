@@ -86,6 +86,7 @@ let locals = parseLocals(options.locals, inputDir)
 
 // Google Chrome headless configuration
 const puppeteerConfig = {
+  executablePath: '/usr/bin/chromium',
   headless: true,
   args: (!options.sandbox ? ['--no-sandbox'] : []).concat([
     '--disable-translate',
